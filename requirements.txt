@@ -1,0 +1,6 @@
+streamlit>=1.41
+agno>=2.2.10
+google-genai>=1.0
+duckdb>=1.1
+pandas>=2.2
+openpyxl>=3.1

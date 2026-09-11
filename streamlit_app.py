@@ -14,16 +14,35 @@ from agno.models.google import Gemini
 from agno.tools.duckdb import DuckDbTools
 from agno.tools.pandas import PandasTools
 
-st.set_page_config(page_title="סוכן ניתוח נתונים", page_icon="📊", layout="wide")
+st.set_page_config(
+    page_title="סוכן ניתוח נתונים",
+    page_icon="📊",
+    layout="centered",
+    initial_sidebar_state="collapsed",
+)
 
 # ---------- עיצוב RTL ----------
+# חשוב: לא מפעילים direction:rtl על .stApp — זה שובר את מיקום הסרגל הנפתח בנייד.
+# מפעילים רק על תוכן הבלוקים עצמם.
 st.markdown(
     """
     <style>
-      .stApp { direction: rtl; }
-      section[data-testid="stSidebar"] { direction: rtl; }
-      textarea, input { direction: rtl; text-align: right; }
-      .stDataFrame { direction: ltr; }
+      .stMain .block-container,
+      section[data-testid="stSidebar"] .block-container {
+          direction: rtl;
+          text-align: right;
+      }
+      textarea, input[type="text"], input[type="password"] {
+          direction: rtl;
+          text-align: right;
+      }
+      [data-testid="stDataFrame"], [data-testid="stDataFrameResizable"] {
+          direction: ltr;
+      }
+      /* מרווח צד בנייד */
+      @media (max-width: 640px) {
+          .stMain .block-container { padding-left: 1rem; padding-right: 1rem; }
+      }
     </style>
     """,
     unsafe_allow_html=True,
